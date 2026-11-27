@@ -1,5 +1,5 @@
 ﻿import { useState } from 'react';
-import { Mail, Lock, Eye, EyeOff, User, Shield } from 'lucide-react';
+import { Mail, Lock, Eye, EyeOff, User } from 'lucide-react';
 
 interface RegisterPageProps {
   onRegister: (email: string, password: string, name: string, role: string) => void;
@@ -11,7 +11,6 @@ export function RegisterPage({ onRegister, onSwitchToLogin }: RegisterPageProps)
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [role, setRole] = useState('operator');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
@@ -30,7 +29,8 @@ export function RegisterPage({ onRegister, onSwitchToLogin }: RegisterPageProps)
       return;
     }
 
-    onRegister(email, password, name, role);
+    // Public sign-ups are always operators. Admins are created from User Management.
+    onRegister(email, password, name, 'operator');
   };
 
   return (
@@ -126,33 +126,6 @@ export function RegisterPage({ onRegister, onSwitchToLogin }: RegisterPageProps)
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
                   {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                </button>
-              </div>
-            </div>
-
-            {/* Account Type */}
-            <div>
-              <label className="block text-foreground mb-2">Account Type</label>
-              <div className="grid grid-cols-2 gap-3">
-                <button
-                  type="button"
-                  onClick={() => setRole('operator')}
-                  className={`p-3 rounded-lg border text-left transition-all ${
-                    role === 'operator' ? 'border-[#22C55E] bg-[#22C55E]/5' : 'border-border'
-                  }`}
-                >
-                  <User className="w-4 h-4 mb-1 text-[#22C55E]" />
-                  <p className="text-foreground text-sm">Operator</p>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setRole('admin')}
-                  className={`p-3 rounded-lg border text-left transition-all ${
-                    role === 'admin' ? 'border-[#F59E0B] bg-[#F59E0B]/5' : 'border-border'
-                  }`}
-                >
-                  <Shield className="w-4 h-4 mb-1 text-[#F59E0B]" />
-                  <p className="text-foreground text-sm">Admin</p>
                 </button>
               </div>
             </div>
