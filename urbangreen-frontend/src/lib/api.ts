@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:8000';
+const BASE_URL = 'https://api.urbangreen.site';
 const API_URL = `${BASE_URL}/api`;
 
 export const api = axios.create({
@@ -229,9 +229,8 @@ export async function generateReport(type: string, name?: string) {
 }
 
 export function getReportDownloadUrl(reportLogId: number) {
-  return `http://localhost:8000/api/reports/${reportLogId}/download`;
+  return `https://api.urbangreen.site/api/reports/${reportLogId}/download`;
 }
-
 export interface AppUser {
   id: number;
   name: string;
