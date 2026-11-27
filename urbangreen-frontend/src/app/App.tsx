@@ -100,7 +100,7 @@ const handleRegister = async (email: string, password: string, name: string, rol
   return (
     <>
       <Toaster position="top-right" richColors />
-    <div className="size-full">
+   <div className="min-h-screen w-full">
         {!isLoggedIn ? (
           showRecovery ? (
             <RecoverAdminPage onBackToLogin={() => { setShowRecovery(false); window.location.hash = ''; }} />

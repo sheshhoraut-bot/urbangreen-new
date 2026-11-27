@@ -25,7 +25,7 @@ export function RegisterPage({ onRegister, onSwitchToLogin }: RegisterPageProps)
       return;
     }
 
- if (password.length < 8) {
+    if (password.length < 8) {
       setError('Password must be at least 8 characters');
       return;
     }
@@ -34,16 +34,16 @@ export function RegisterPage({ onRegister, onSwitchToLogin }: RegisterPageProps)
   };
 
   return (
-    <div className="h-screen flex">
+    <div className="min-h-screen flex">
       {/* Left Side - Register Form */}
-      <div className="w-1/2 bg-background flex items-center justify-center p-12">
+      <div className="w-full md:w-1/2 bg-background flex items-center justify-center px-6 py-10 md:p-12">
         <div className="w-full max-w-md">
           {/* Logo */}
-          <div className="flex items-center gap-3 mb-8">
-            <div className="w-20 h-20 bg-[#22C55E] rounded-lg flex items-center justify-center">
-              <span className="text-white text-5xl">🌱</span>
+          <div className="flex items-center gap-3 mb-6 md:mb-8">
+            <div className="w-14 h-14 md:w-20 md:h-20 shrink-0 bg-[#22C55E] rounded-lg flex items-center justify-center">
+              <span className="text-white text-3xl md:text-5xl">🌱</span>
             </div>
-            <span className="text-[#22C55E] text-3xl tracking-wide">URBANGREEN+</span>
+            <span className="text-[#22C55E] text-2xl md:text-3xl tracking-wide">URBANGREEN+</span>
           </div>
 
           {/* Welcome Text */}
@@ -130,8 +130,7 @@ export function RegisterPage({ onRegister, onSwitchToLogin }: RegisterPageProps)
               </div>
             </div>
 
-
-           {/* Account Type */}
+            {/* Account Type */}
             <div>
               <label className="block text-foreground mb-2">Account Type</label>
               <div className="grid grid-cols-2 gap-3">
@@ -184,8 +183,8 @@ export function RegisterPage({ onRegister, onSwitchToLogin }: RegisterPageProps)
         </div>
       </div>
 
-      {/* Right Side - Design/Image */}
-      <div className="w-1/2 bg-background flex items-center justify-center p-12 relative overflow-hidden">
+      {/* Right Side - Design/Image (hidden on phones) */}
+      <div className="hidden md:flex w-1/2 bg-background items-center justify-center p-12 relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-20 right-20 w-64 h-64 bg-[#22C55E]/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-20 w-80 h-80 bg-[#22C55E]/20 rounded-full blur-3xl"></div>

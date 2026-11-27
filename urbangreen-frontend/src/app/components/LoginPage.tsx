@@ -29,18 +29,18 @@ function clearResetLink() {
 
 function Logo() {
   return (
-    <div className="flex items-center gap-3 mb-8">
-      <div className="w-20 h-20 bg-[#22C55E] rounded-lg flex items-center justify-center">
-        <span className="text-white text-5xl">{'\u{1F331}'}</span>
+    <div className="flex items-center gap-3 mb-6 md:mb-8">
+      <div className="w-14 h-14 md:w-20 md:h-20 shrink-0 bg-[#22C55E] rounded-lg flex items-center justify-center">
+        <span className="text-white text-3xl md:text-5xl">{'\u{1F331}'}</span>
       </div>
-      <span className="text-[#22C55E] text-3xl tracking-wide">URBANGREEN+</span>
+      <span className="text-[#22C55E] text-2xl md:text-3xl tracking-wide">URBANGREEN+</span>
     </div>
   );
 }
 
 function RightPanel() {
   return (
-    <div className="w-1/2 bg-background flex items-center justify-center p-12 relative overflow-hidden">
+    <div className="hidden md:flex w-1/2 bg-background items-center justify-center p-12 relative overflow-hidden">
       <div className="absolute top-20 right-20 w-64 h-64 bg-[#22C55E]/20 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-20 w-80 h-80 bg-[#22C55E]/20 rounded-full blur-3xl" />
       <div className="relative z-10 text-center max-w-lg">
@@ -65,14 +65,14 @@ function AuthShell({ children }: { children: React.ReactNode }) {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="h-screen flex">
+    <div className="min-h-screen flex">
       <button
         onClick={toggleTheme}
         className="fixed top-4 right-4 z-50 w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center hover:bg-muted transition-colors"
       >
         {theme === 'dark' ? <Sun className="w-5 h-5 text-[#F59E0B]" /> : <Moon className="w-5 h-5 text-muted-foreground" />}
       </button>
-      <div className="w-1/2 bg-background flex items-center justify-center p-12">
+      <div className="w-full md:w-1/2 bg-background flex items-center justify-center px-6 pt-20 pb-10 md:p-12">
         <div className="w-full max-w-md">{children}</div>
       </div>
       <RightPanel />
@@ -196,7 +196,9 @@ export function LoginPage({ onLogin, onSwitchToRegister, onRecoverAdmin }: Login
     return (
       <AuthShell>
         <div className="text-center">
-          <Logo />
+          <div className="flex justify-center">
+            <Logo />
+          </div>
           <div className="flex justify-center mb-6">
             <div className="w-24 h-24 bg-[#22C55E]/10 rounded-full flex items-center justify-center">
               <CheckCircle className="w-12 h-12 text-[#22C55E]" />
@@ -221,14 +223,16 @@ export function LoginPage({ onLogin, onSwitchToRegister, onRecoverAdmin }: Login
     return (
       <AuthShell>
         <div className="text-center">
-          <Logo />
+          <div className="flex justify-center">
+            <Logo />
+          </div>
           <div className="flex justify-center mb-6">
             <div className="w-24 h-24 bg-[#22C55E]/10 rounded-full flex items-center justify-center">
               <Mail className="w-12 h-12 text-[#22C55E]" />
             </div>
           </div>
           <h2 className="text-foreground mb-2">Check your inbox</h2>
-          <p className="text-muted-foreground mb-2">
+          <p className="text-muted-foreground mb-2 break-words">
             If <strong className="text-foreground">{fpEmail}</strong> is registered, we sent a link to reset your password.
           </p>
           <p className="text-muted-foreground text-sm mb-8">
@@ -301,7 +305,7 @@ export function LoginPage({ onLogin, onSwitchToRegister, onRecoverAdmin }: Login
       <AuthShell>
         <Logo />
         <h2 className="text-foreground mb-2">Set New Password</h2>
-        <p className="text-muted-foreground mb-8">
+        <p className="text-muted-foreground mb-8 break-words">
           Enter a new password for <strong className="text-foreground">{resetLink?.email}</strong>
         </p>
         <form onSubmit={handleResetSubmit} className="space-y-5">

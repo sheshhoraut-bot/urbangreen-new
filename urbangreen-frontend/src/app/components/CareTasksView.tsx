@@ -189,8 +189,8 @@ export function CareTasksView({ currentUser }: CareTasksViewProps) {
   const typeLabel = (value: string) => taskTypes.find((t) => t.value === value)?.label || value;
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-4 md:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h2 className="text-foreground mb-2">Care Tasks</h2>
           <p className="text-muted-foreground">
@@ -200,7 +200,7 @@ export function CareTasksView({ currentUser }: CareTasksViewProps) {
         {isAdmin && (
           <button
             onClick={openAddDialog}
-            className="flex items-center gap-2 px-4 py-2 bg-[#22C55E] text-white rounded-lg hover:bg-[#16A34A] transition-colors"
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-[#22C55E] text-white rounded-lg hover:bg-[#16A34A] transition-colors"
           >
             <Plus className="w-4 h-4" />
             Add Task
@@ -227,16 +227,16 @@ export function CareTasksView({ currentUser }: CareTasksViewProps) {
       {loading ? (
         <p className="text-muted-foreground">Loading tasks...</p>
       ) : visibleTasks.length === 0 ? (
-        <div className="bg-card rounded-2xl p-12 border border-border text-center">
+        <div className="bg-card rounded-2xl p-6 md:p-12 border border-border text-center">
           <ClipboardList className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
           <p className="text-muted-foreground">
             {isAdmin ? 'No tasks here. Add a task to get started.' : 'No tasks assigned to you.'}
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {visibleTasks.map((task) => (
-            <div key={task.id} className="bg-card rounded-2xl p-6 border border-border">
+            <div key={task.id} className="bg-card rounded-2xl p-4 md:p-6 border border-border">
               <div className="flex items-start justify-between mb-3">
                 <span className="px-3 py-1 rounded-full text-xs text-[#38BDF8] bg-[#38BDF8]/10">
                   {typeLabel(task.type)}
@@ -253,12 +253,12 @@ export function CareTasksView({ currentUser }: CareTasksViewProps) {
                 )}
               </div>
 
-              <h3 className="text-foreground mb-1">{task.title}</h3>
-              <p className="text-muted-foreground text-sm mb-1">
+              <h3 className="text-foreground mb-1 break-words">{task.title}</h3>
+              <p className="text-muted-foreground text-sm mb-1 break-words">
                 {task.plant || task.zone || 'General'}
                 {task.assignee ? ` ${'\u00B7'} ${task.assignee}` : ''}
               </p>
-              <p className="text-muted-foreground text-sm mb-3 flex items-center gap-2">
+              <p className="text-muted-foreground text-sm mb-3 flex flex-wrap items-center gap-x-2 gap-y-1">
                 Due {task.due_date}
                 {task.repeat_days ? (
                   <span className="flex items-center gap-1">
@@ -266,9 +266,9 @@ export function CareTasksView({ currentUser }: CareTasksViewProps) {
                   </span>
                 ) : null}
               </p>
-              {task.notes && <p className="text-muted-foreground text-sm mb-3">{task.notes}</p>}
+              {task.notes && <p className="text-muted-foreground text-sm mb-3 break-words">{task.notes}</p>}
 
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 {task.status === 'completed' ? (
                   <span className="inline-block px-3 py-1 rounded-full text-xs text-[#22C55E] bg-[#22C55E]/10">
                     Completed
@@ -298,7 +298,7 @@ export function CareTasksView({ currentUser }: CareTasksViewProps) {
       )}
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="bg-card border-border text-foreground">
+        <DialogContent className="bg-card border-border text-foreground w-[calc(100vw-2rem)] max-w-lg">
           <DialogHeader>
             <DialogTitle className="text-foreground">{editingTask ? 'Edit Task' : 'Add Task'}</DialogTitle>
           </DialogHeader>
@@ -400,7 +400,7 @@ export function CareTasksView({ currentUser }: CareTasksViewProps) {
               />
             </div>
           </div>
-          <DialogFooter>
+          <DialogFooter className="gap-2 sm:gap-0">
             <button
               onClick={() => setDialogOpen(false)}
               className="px-4 py-2 bg-muted text-foreground rounded-lg hover:bg-muted/70 transition-colors"
